@@ -1,0 +1,60 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/decision_tree_chat?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:secret}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate        # schema managed by schema.sql — never auto-drop in prod
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+
+  cache:
+    type: simple               # swap to REDIS for distributed deployments
+
+chatbot:
+  session:
+    ttl-minutes: 30            # session idle timeout
+    max-messages: 500          # max messages per session before auto-close
+
+  nlp:
+    provider: opennlp          # opennlp | dialogflow | rasa | openai
+    confidence-threshold: 0.65 # minimum confidence to accept an intent
+    fallback-to-default: true  # if confidence < threshold, treat as DEFAULT edge
+
+    # Apache OpenNLP model paths (relative to classpath)
+    opennlp:
+      models-path: nlp-models/
+      language: en
+
+    # Dialogflow config (used when provider=dialogflow)
+    dialogflow:
+      project-id: ${DIALOGFLOW_PROJECT_ID:}
+      credentials-path: ${DIALOGFLOW_CREDENTIALS:}
+
+    # Rasa config (used when provider=rasa)
+    rasa:
+      base-url: ${RASA_URL:http://localhost:5005}
+
+    # OpenAI config (used when provider=openai)
+    openai:
+      api-key: ${OPENAI_API_KEY:}
+      model: gpt-4o-mini
+
+  actions:
+    http:
+      connect-timeout-ms: 3000
+      read-timeout-ms: 8000
+
+logging:
+  level:
+    com.chatbot: DEBUG
+    org.springframework.web: INFO
