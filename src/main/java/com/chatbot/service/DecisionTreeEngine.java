@@ -1,7 +1,6 @@
 package com.chatbot.service;
 
 import com.chatbot.model.*;
-import com.chatbot.model.Models.*;
 import com.chatbot.nlp.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;

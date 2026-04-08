@@ -1,8 +1,9 @@
 package com.chatbot.nlp;
 
-import org.apache.opennlp.tools.doccat.DoccatModel;
-import org.apache.opennlp.tools.doccat.DocumentCategorizerME;
-import org.apache.opennlp.tools.tokenize.SimpleTokenizer;
+
+import opennlp.tools.doccat.DoccatModel;
+import opennlp.tools.doccat.DocumentCategorizerME;
+import opennlp.tools.tokenize.SimpleTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +26,7 @@ public class OpenNlpProvider implements NlpProvider {
     private static final Logger log = LoggerFactory.getLogger(OpenNlpProvider.class);
 
     // DocumentCategorizerME trained model — loaded once at startup
-    private DoccatModel         model;
+    private DoccatModel model;
     private DocumentCategorizerME categorizer;
     private final SimpleTokenizer tokenizer = SimpleTokenizer.INSTANCE;
 

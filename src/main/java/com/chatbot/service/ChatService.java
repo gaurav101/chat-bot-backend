@@ -1,6 +1,5 @@
 package com.chatbot.service;
 
-import com.chatbot.model.Models.*;
 import com.chatbot.model.*;
 import com.chatbot.nlp.NlpResult;
 import com.chatbot.repository.*;
