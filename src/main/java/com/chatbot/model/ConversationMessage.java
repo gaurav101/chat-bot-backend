@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -34,7 +35,8 @@ public class ConversationMessage {
     private Node node;
 
     @Column(length = 100) private String intentDetected;
-    @Column(precision = 5, scale = 4) private Double confidence;
+    @Column(name = "confidence", precision = 10, scale = 2) // Match your DB precision/scale
+    private BigDecimal confidence;
 
     @JdbcTypeCode(SqlTypes.JSON) @Column(columnDefinition = "JSON")
     private Map<String, Object> entitiesJson;

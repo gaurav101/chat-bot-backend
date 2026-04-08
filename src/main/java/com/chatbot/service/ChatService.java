@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -132,7 +133,7 @@ public class ChatService {
                 .direction(m.getDirection().name())
                 .text(m.getMessageText())
                 .intent(m.getIntentDetected())
-                .confidence(m.getConfidence())
+                .confidence(Double.valueOf(String.valueOf(m.getConfidence())))
                 .sentAt(m.getSentAt().toString())
                 .build()).toList();
     }
@@ -161,7 +162,7 @@ public class ChatService {
         msg.setNode(node);
         if (nlp != null) {
             msg.setIntentDetected(nlp.getTopIntent());
-            msg.setConfidence(nlp.getConfidence());
+            msg.setConfidence(BigDecimal.valueOf((float) nlp.getConfidence()));
             msg.setEntitiesJson(nlp.getEntities() != null
                     ? new HashMap<>(nlp.getEntities()) : null);
             msg.setRawNlpResponse(nlp.getRawProviderResponse());
