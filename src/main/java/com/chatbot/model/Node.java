@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 // ─────────────────────────────────────────────────────────────
 // Node
@@ -42,9 +43,9 @@ public class Node {
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "fromNode", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "fromNode", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderBy("priority DESC")
-    private List<Edge> outgoingEdges = new ArrayList<>();
+    private Set<Edge> outgoingEdges ;
 
     @OneToOne(mappedBy = "node", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private NodeAction action;

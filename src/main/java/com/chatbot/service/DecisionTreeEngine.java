@@ -50,7 +50,7 @@ public class DecisionTreeEngine {
             throw new IllegalStateException("Session has no current node: " + session.getSessionToken());
         }
 
-        List<Edge> edges = currentNode.getOutgoingEdges();
+        Set<Edge> edges = currentNode.getOutgoingEdges();
 
         // ── 1. NLP analysis (only when needed by edges or node type) ──
         NlpResult nlp = null;
